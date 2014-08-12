@@ -1,0 +1,142 @@
+#include "defines.hpp"
+#include "defines2.hpp"
+#include "build_recipe_dialog.hpp"
+#include "build_recipe_list_dialog.hpp"
+
+respawn = "BASE";
+respawndelay = 5;
+onLoadMission= "SERE DayZ Overwatch w/ rMod v2.1";
+OnLoadIntro = "Welcome to Chernarus";
+OnLoadIntroTime = False;
+OnLoadMissionTime = False;
+disabledAI = true;
+disableChannels[]={0,2,6};
+enableItemsDropping = 0;
+onPauseScript = "";
+briefing = 0;
+debriefing = 0;
+loadScreen = "loadscreen.jpg";
+
+class Header
+{
+	gameType = COOP;
+	minPlayers = 1;
+	maxPlayers = 100;
+};
+
+aiKills = 1;
+diagRadio = 1;
+diagHit = 1;
+
+class DayZ_loadingScreen
+{ 
+	idd = -1;
+	duration = 10e10;
+	fadein = 0;
+	fadeout = 0;
+	name = "loading screen";
+	class controlsBackground
+	{
+		class blackBG : RscText
+		{
+			x = safezoneX;
+			y = safezoneY;
+			w = safezoneW;
+			h = safezoneH;
+			text = "";
+			colorText[] = {0,0,0,0};
+			colorBackground[] = {0,0,0,1};
+		};
+	};
+	class controls
+	{
+		class Title1 : RscLoadingText
+		{
+			text = "$STR_LOADING";
+		};
+		class CA_Progress : RscProgress
+		{
+			idc = 104;
+			type = 8;
+			style = 0;
+			texture = "\ca\ui\data\loadscreen_progressbar_ca.paa";
+		};
+		class CA_Progress2 : RscProgressNotFreeze
+		{
+			idc = 103;
+		};
+		class Name2: RscText
+		{
+			idc = 101;
+			x = 0.05;
+			y = 0.029412;
+			w = 0.9;
+			h = 0.04902;
+			text = "";
+			sizeEx = 0.05;
+			colorText[] = {0.543,0.5742,0.4102,1.0};
+		};
+	};
+};
+class RscTitles
+{
+	titles[] = {"dsow"};
+	class dsow {
+		idd = -1;
+		movingEnable = 0;
+		duration = 10;
+		fadein = 2;
+		fadeout = 2;
+		name="dsow";
+		controls[]={"Picture"};
+		class Picture {
+			x = "0.00001 * safezoneW + safezoneX";
+			y = "0.00001 * safezoneH + safezoneY";
+			w = "1 * safezoneW";
+			h = "1 * safezoneH";
+			text="\z\addons\ow_assets\screen\screen_death_ow.paa";
+			sizeEx = -1;
+			type=0;
+			idc=-1;
+			style=48;
+			colorBackground[]={0,0,0,0};
+			colorText[]={1,1,1,1};
+			font="Bitstream";
+		};
+	};
+	class wm_disp {
+		idd = -1;
+		onLoad = "uiNamespace setVariable ['wm_disp', _this select 0]";
+		fadein = 0;
+		fadeout = 0;
+		duration = 10e10;
+		controlsBackground[] = {};
+		objects[] = {};
+		class controls {
+			class wm_text2 {
+				idc = 1;
+				x = safeZoneX+0.027;//safeZoneW*0.01;
+				y = safeZoneY+safeZoneH-0.16;
+				w = 1.151*safeZoneH;
+				h = 0.057*safeZoneH;
+				shadow = 2;
+				class Attributes
+				{
+					font = "EtelkaNarrowMediumPro";
+					color = "#24FFFFFF";
+					align = "left"; // put "center" here if you want some background
+					valign = "middle";
+					shadow = 2;
+				};
+				colorBackground[] = { 1, 0.3, 0, 0 };  // uncomment and increase 4th number to have a background
+				font = "EtelkaNarrowMediumPro";
+				size = 0.06*safeZoneH;
+				type = 13;
+				style = 0;
+				text="";
+			};
+		};
+	};
+};
+
+#include "addons\SARGE\SAR_define.hpp"
